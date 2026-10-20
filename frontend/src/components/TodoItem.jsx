@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Pencil, Trash2 } from "lucide-react";
 
 function TodoItem({ todo, onToggle, onUpdate, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -142,7 +143,7 @@ function TodoItem({ todo, onToggle, onUpdate, onDelete }) {
               onClick={() => setIsEditing(true)}
               className="rounded-lg border border-blue-500/20 bg-blue-500/10 px-3 py-2 text-sm font-medium text-blue-400 transition hover:bg-blue-500/20"
             >
-              Edit
+              <Pencil size={18} />
             </button>
 
             <button
@@ -150,7 +151,7 @@ function TodoItem({ todo, onToggle, onUpdate, onDelete }) {
               onClick={() => onDelete(todo._id)}
               className="rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm font-medium text-red-400 transition hover:bg-red-500/20"
             >
-              Delete
+              <Trash2 size={18} />
             </button>
           </div>
         </div>
