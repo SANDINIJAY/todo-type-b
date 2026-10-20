@@ -28,7 +28,7 @@ function TodoForm({ onAdd }) {
     } catch (err) {
       setError(
         err.response?.data?.message ||
-          "Failed to create task. Please try again."
+          "Failed to create task. Please try again.",
       );
     } finally {
       setSubmitting(false);
@@ -38,17 +38,15 @@ function TodoForm({ onAdd }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-8 rounded-2xl bg-white p-6 shadow-sm"
+      className="mb-8 rounded-2xl border border-slate-700/60 bg-slate-800/70 p-6 shadow-xl shadow-black/10"
     >
-      <h2 className="mb-4 text-xl font-semibold text-slate-800">
-        Add New Task
-      </h2>
+      <h2 className="mb-5 text-xl font-semibold text-white">Add New Task</h2>
 
       <div className="space-y-4">
         <div>
           <label
             htmlFor="todo-title"
-            className="mb-1 block text-sm font-medium text-slate-700"
+            className="mb-2 block text-sm font-medium text-slate-300"
           >
             Task Title *
           </label>
@@ -60,14 +58,14 @@ function TodoForm({ onAdd }) {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="What do you need to do?"
             maxLength={120}
-            className="w-full rounded-lg border border-slate-200 px-4 py-3 outline-none focus:border-blue-500"
+            className="w-full rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-white placeholder:text-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
           />
         </div>
 
         <div>
           <label
             htmlFor="todo-description"
-            className="mb-1 block text-sm font-medium text-slate-700"
+            className="mb-2 block text-sm font-medium text-slate-300"
           >
             Description (Optional)
           </label>
@@ -78,7 +76,7 @@ function TodoForm({ onAdd }) {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Add more details..."
             rows={3}
-            className="w-full resize-none rounded-lg border border-slate-200 px-4 py-3 outline-none focus:border-blue-500"
+            className="w-full resize-none rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-white placeholder:text-slate-500 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
           />
         </div>
 
@@ -91,7 +89,7 @@ function TodoForm({ onAdd }) {
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-500 disabled:opacity-50"
         >
           {submitting ? "Adding..." : "+ Add Task"}
         </button>

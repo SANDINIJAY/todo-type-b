@@ -8,6 +8,10 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const totalTasks = todos.length;
+  const completedTasks = todos.filter((todo) => todo.done).length;
+  const pendingTasks = totalTasks - completedTasks;
+
   useEffect(() => {
     const fetchTodos = async () => {
       try {
@@ -72,84 +76,77 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 p-8">
-      <div className="mx-auto max-w-2xl">
-        <h1 className="mb-6 text-3xl font-bold text-slate-800">My TODO App</h1>
+    <div className="min-h-screen bg-[#0B1120] px-4 py-6 text-white lg:h-screen lg:overflow-hidden">
+      <div className="mx-auto flex h-full max-w-7xl flex-col">
+        {/* Header */}
+        <header className="mb-6 my-20 shrink-0">
+          <h1 className="text-5xl font-bold tracking-tight">TODO APP ✍️</h1>
+        </header>
 
-        {/* ************************ */}
-        <TodoForm onAdd={handleAddTodo} />
-        {/* ************************ */}
-        {loading && <p>Loading tasks...</p>}
-
-        {error && <p className="text-red-500">{error}</p>}
-
-        {!loading && !error && todos.length === 0 && (
-          <p>No tasks yet. Add your first TODO!</p>
-        )}
-
-        {/* <div className="space-y-3">
-          {todos.map((todo) => (
-            <div>
-              <div key={todo._id} className="rounded-xl bg-white p-4 shadow-sm">
-                <h2
-                  className={`font-semibold ${
-                    todo.done ? "text-slate-400 line-through" : "text-slate-800"
-                  }`}
-                >
-                  {todo.title}
+        {/* Main Dashboard */}
+        <div className="grid min-h-0 flex-1 grid-cols-1 gap-6 lg:grid-cols-5">
+          {/* LEFT SIDE */}
+          <section className="space-y-6 lg:col-span-2 lg:overflow-y-auto">
+            <div className="grid grid-cols-3 gap-4">
+              {" "}
+              {/* Total Tasks */}
+              <div className="rounded-2xl border border-slate-700/60 bg-slate-800/70 p-5">
+                <p className="text-sm text-slate-400">Total Tasks</p>
+                <h2 className="mt-2 text-3xl font-bold text-blue-400">
+                  {totalTasks}
                 </h2>
-
-                {todo.description && (
-                  <p className="mt-1 text-sm text-slate-500">
-                    {todo.description}
-                  </p>
-                )}
-
-                <span
-                  className={`mt-2 inline-block text-xs ${
-                    todo.done ? "text-green-600" : "text-orange-500"
-                  }`}
-                >
-                  {todo.done ? "Completed" : "Pending"}
-                </span>
-
-                <div className="flex items-start gap-3">
-                  <input
-                    type="checkbox"
-                    checked={todo.done}
-                    onChange={() => handleToggleTodo(todo._id)}
-                    aria-label={`Mark ${todo.title} as ${
-                      todo.done ? "not completed" : "completed"
-                    }`}
-                    className="mt-1 h-5 w-5 cursor-pointer accent-blue-600"
-                  />
-
-                  <div>
-                    {todo.description && (
-                      <p className="mt-1 text-sm text-slate-500">
-                        {todo.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
+              </div>
+              {/* Pending Tasks */}
+              <div className="rounded-2xl border border-slate-700/60 bg-slate-800/70 p-5">
+                <p className="text-sm text-slate-400">Pending</p>
+                <h2 className="mt-2 text-3xl font-bold text-amber-400">
+                  {pendingTasks}
+                </h2>
+              </div>
+              {/* Completed Tasks */}
+              <div className="rounded-2xl border border-slate-700/60 bg-slate-800/70 p-5">
+                <p className="text-sm text-slate-400">Completed</p>
+                <h2 className="mt-2 text-3xl font-bold text-emerald-400">
+                  {completedTasks}
+                </h2>
               </div>
             </div>
 
+            <TodoForm onAdd={handleAddTodo} />
+          </section>
 
+          {/* RIGHT SIDE */}
+          <section className="flex min-h-0 flex-col rounded-2xl border border-slate-700/60 bg-slate-900/40 p-5 lg:col-span-3">
+            <div className="mb-5 flex shrink-0 items-center justify-between">
+              <h2 className="text-xl font-semibold">My Tasks</h2>
 
-          ))}
-        </div> */}
+              <span className="text-sm text-slate-400">{totalTasks} tasks</span>
+            </div>
 
-        <div className="space-y-3">
-          {todos.map((todo) => (
-            <TodoItem
-              key={todo._id}
-              todo={todo}
-              onToggle={handleToggleTodo}
-              onUpdate={handleUpdateTodo}
-              onDelete={handleDeleteTodo}
-            />
-          ))}
+            <div className="min-h-0 flex-1 space-y-3 lg:overflow-y-auto lg:pr-2">
+              {loading && <p className="text-slate-400">Loading tasks...</p>}
+
+              {error && <p className="text-red-400">{error}</p>}
+
+              {!loading && !error && todos.length === 0 && (
+                <p className="text-slate-400">
+                  No tasks yet. Add your first TODO!
+                </p>
+              )}
+
+              {!loading &&
+                !error &&
+                todos.map((todo) => (
+                  <TodoItem
+                    key={todo._id}
+                    todo={todo}
+                    onToggle={handleToggleTodo}
+                    onUpdate={handleUpdateTodo}
+                    onDelete={handleDeleteTodo}
+                  />
+                ))}
+            </div>
+          </section>
         </div>
       </div>
     </div>
