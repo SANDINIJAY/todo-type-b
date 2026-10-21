@@ -1,16 +1,92 @@
-# React + Vite
+# TODO App — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A responsive TODO management application built with React and Vite. The application allows users to create, view, update, complete, and delete tasks through a REST API.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React — User interface and state management
+- Vite — Frontend development and build tool
+- Tailwind CSS v4 — Styling and responsive layout
+- Axios — HTTP requests
+- Lucide React — Interface icons
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Create tasks with a required title and optional description
+- View tasks retrieved from MongoDB through the backend API
+- Edit existing tasks
+- Mark tasks as completed or pending
+- Delete tasks with confirmation
+- View total, pending, and completed task counts
+- Responsive dark-themed dashboard
+- Loading, validation, and error messages
 
-## Expanding the Oxlint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- Node.js and npm
+- A running instance of the TODO backend
+
+## Installation
+
+From the project root:
+
+```bash
+npm install
+```
+
+Alternatively, to install the frontend independently:
+
+```bash
+cd frontend
+npm install
+```
+
+## Environment Configuration
+
+Create a `.env` file inside the `frontend` directory using `.env.example` as a reference.
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+The URL should point to the running backend API.
+
+## Running the Application
+
+From the frontend directory:
+
+```bash
+npm run dev
+```
+
+Or, if using the configured npm workspace scripts, from the project root:
+
+```bash
+npm run dev:frontend
+```
+
+Open the local URL displayed by Vite, normally:
+
+http://localhost:5173
+
+## Application Structure
+
+```text
+src/
+├── components/
+│   ├── TodoForm.jsx
+│   └── TodoItem.jsx
+├── services/
+│   └── api.js
+├── App.jsx
+└── index.css
+```
+
+
+## Assumptions and Limitations
+
+- The application is designed for a single shared task list and does not implement user authentication.
+- The backend must be running for tasks to be loaded or modified.
+- Task statistics are calculated from the tasks loaded into React state.
+- Data persistence is handled by the backend and MongoDB.
+- The application is configured for local development by default.

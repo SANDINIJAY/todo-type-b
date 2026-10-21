@@ -177,3 +177,12 @@ backend/
 - `server.js` configures Express, middleware, database connectivity, and routes.
 - `models/Todo.js` defines the MongoDB TODO schema.
 - `routes/todoRoutes.js` contains the CRUD API endpoints.
+
+
+## Assumptions and Limitations
+
+- The application uses a single shared TODO collection.
+- Authentication and user-specific task ownership are not implemented.
+- MongoDB must be accessible for the API to operate.
+- The backend is intended for local development and assessment demonstration.
+- Automated tests and production deployment configuration are outside the current implementation scope.
